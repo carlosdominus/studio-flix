@@ -5,7 +5,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Play, ChevronLeft, ChevronRight, Info, Clock, CheckCircle2, LayoutGrid, Search, User, RefreshCw, AlertCircle } from 'lucide-react';
+import { Play, ChevronLeft, ChevronRight, Info, Clock, CheckCircle2, LayoutGrid, Search, User, RefreshCw, AlertCircle, Film } from 'lucide-react';
 import { INITIAL_DATA, Class, Module } from './types.ts';
 import { fetchLessonsFromDrive, DriveFile } from './services/driveService.ts';
 
@@ -21,6 +21,7 @@ export default function App() {
       <aside className="w-56 flex-shrink-0 bg-brand-sidebar border-r border-white/5 flex flex-col z-20">
         <div className="p-5 overflow-y-auto flex-grow h-full custom-scrollbar">
           <h1 className="text-lg font-extrabold tracking-tighter text-gray-300 mb-6 flex items-center gap-2">
+            <Film className="w-5 h-5 text-gray-400" />
             STUDIO<span className="font-light">FLIX</span>
           </h1>
 
@@ -28,7 +29,7 @@ export default function App() {
             {INITIAL_DATA.map((module, idx) => (
               <div key={module.id} className="relative">
                 <div className="text-[9px] uppercase font-bold text-gray-500 tracking-wider mb-1.5 opacity-60">
-                  Module {String(idx + 1).padStart(2, '0')}
+                  {module.title}
                 </div>
                 <div className="space-y-0.5">
                   {module.classes.map((cls) => (
@@ -42,7 +43,7 @@ export default function App() {
                       }`}
                     >
                       <div className="text-[12px] font-medium truncate leading-tight">
-                        {cls.title}
+                        {module.title} / {cls.title}
                       </div>
                       <div className="flex items-center gap-1 text-[9px] text-gray-500 mt-0.5">
                         <Clock className="w-2.5 h-2.5" /> {cls.duration}
