@@ -124,7 +124,7 @@ export default function App() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 xl:gap-12">
             {/* Primary Content (Player + Info) */}
             <div className="lg:col-span-8 xl:col-span-9 space-y-4 sm:space-y-6 lg:space-y-8">
-              <div className="aspect-video bg-black rounded-xl lg:rounded-2xl overflow-hidden shadow-[0_32px_64px_-16px_rgba(0,0,0,0.8)] relative border border-white/5">
+            <div className="aspect-video bg-black rounded-xl lg:rounded-2xl overflow-hidden shadow-[0_32px_64px_-16px_rgba(0,0,0,0.8)] relative border border-white/5">
                 <AnimatePresence mode="wait">
                   {selectedClass?.videoUrl ? (
                     <motion.iframe
@@ -133,7 +133,7 @@ export default function App() {
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
                       src={selectedClass.videoUrl}
-                      className="absolute w-full h-[110%] -top-[5%] left-0 md:h-[135%] md:-top-[18%]"
+                      className="absolute top-1/2 left-1/2 w-[160%] h-[160%] -translate-x-1/2 -translate-y-[65%] md:w-[135%] md:h-[135%] md:-translate-y-[62%]"
                       allow="autoplay; encrypted-media; picture-in-picture"
                       allowFullScreen
                       referrerPolicy="no-referrer"
