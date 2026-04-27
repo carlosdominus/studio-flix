@@ -20,7 +20,7 @@ export const fetchLessonsFromDrive = async (accessToken: string): Promise<DriveF
 
   if (!response.ok) {
     const error = await response.json();
-    throw new Error(error.error?.message || 'Erro ao buscar arquivos do Drive');
+    throw new Error(error.error?.message || 'Error fetching files from Drive');
   }
 
   const data = await response.json();

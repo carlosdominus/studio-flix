@@ -159,7 +159,7 @@ export default function App() {
                           </div>
                           
                           <div className="space-y-1">
-                            <div className="text-[10px] font-black uppercase tracking-[0.3em] text-white/40">Continuar Assistindo</div>
+                            <div className="text-[10px] font-black uppercase tracking-[0.3em] text-white/40">Continue Watching</div>
                             <h3 className="text-xl font-black tracking-tighter text-white line-clamp-2 leading-tight">
                               {selectedClass.title}
                             </h3>
@@ -173,8 +173,8 @@ export default function App() {
                             rel="noopener noreferrer"
                             className="inline-flex items-center justify-center gap-3 bg-white text-black px-6 py-4 rounded-xl font-black uppercase text-[10px] tracking-widest w-full shadow-2xl transition-all"
                           >
-                            <Film className="w-4 h-4" />
-                            Assistir no Drive
+                            <Play className="w-4 h-4 fill-black" />
+                            Watch
                             <ChevronRight className="w-4 h-4" />
                           </motion.a>
                         </div>
