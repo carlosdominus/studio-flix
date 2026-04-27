@@ -93,6 +93,7 @@ export default function App() {
                   src={selectedClass.videoUrl}
                   className="w-full h-full"
                   allow="autoplay; encrypted-media; picture-in-picture"
+                  allowFullScreen
                   referrerPolicy="no-referrer"
                   style={{ border: 'none' }}
                 />
