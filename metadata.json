@@ -1,0 +1,6 @@
+{
+  "name": "CourseFlux",
+  "description": "Uma plataforma de cursos estilo Netflix com integração ao Google Drive.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
