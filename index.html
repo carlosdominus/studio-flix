@@ -1,12 +1,33 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <script>
+      (function() {
+        try {
+          const originalFetch = window.fetch;
+          if (originalFetch) {
+            let _fetch = originalFetch;
+            Object.defineProperty(window, 'fetch', {
+              get: function() {
+                return _fetch;
+              },
+              set: function(v) {
+                _fetch = v;
+              },
+              configurable: true,
+              enumerable: true
+            });
+          }
+        } catch (e) {
+          // If we can't redefine it, we just hope for the best
+        }
+      })();
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Studio FLIX</title>
     <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3658/3658959.png" />
     <script src="https://accounts.google.com/gsi/client" async defer></script>
-    <script src="https://apis.google.com/js/api.js"></script>
   </head>
   <body>
     <div id="root"></div>

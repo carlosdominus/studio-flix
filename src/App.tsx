@@ -14,7 +14,18 @@ declare const google: any;
 export default function App() {
   const [selectedClass, setSelectedClass] = useState<Class | null>(INITIAL_DATA[0].classes[0]);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const scrollRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const handleClassSelect = (cls: Class) => {
     setSelectedClass(cls);
@@ -124,23 +135,66 @@ export default function App() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 xl:gap-12">
             {/* Primary Content (Player + Info) */}
             <div className="lg:col-span-8 xl:col-span-9 space-y-4 sm:space-y-6 lg:space-y-8 text-white">
-              <div className="bg-black rounded-xl lg:rounded-2xl overflow-hidden shadow-[0_32px_64px_-16px_rgba(0,0,0,0.8)] relative border border-white/5 flex items-center justify-center">
+              <div className="bg-black rounded-xl lg:rounded-2xl overflow-hidden shadow-[0_32px_64px_-16px_rgba(0,0,0,0.8)] relative border border-white/5 w-full aspect-video">
                 <AnimatePresence mode="wait">
                   {selectedClass?.videoUrl ? (
-                    <motion.iframe
-                      key={selectedClass.id}
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      src={selectedClass.videoUrl}
-                      className="w-full h-full aspect-video"
-                      allow="autoplay; encrypted-media; picture-in-picture"
-                      allowFullScreen
-                      referrerPolicy="no-referrer"
-                      style={{ border: 'none' }}
-                    />
+                    isMobile ? (
+                      <motion.div
+                        key={`mobile-${selectedClass.id}`}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center overflow-hidden"
+                      >
+                        <img 
+                          src={selectedClass.thumbnail} 
+                          className="absolute inset-0 w-full h-full object-cover opacity-30 blur-md scale-110" 
+                          alt="" 
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+                        
+                        <div className="relative z-10 space-y-6 max-w-xs">
+                          <div className="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center mx-auto border border-white/20 backdrop-blur-xl">
+                            <Play className="w-7 h-7 fill-white translate-x-0.5" />
+                          </div>
+                          
+                          <div className="space-y-1">
+                            <div className="text-[10px] font-black uppercase tracking-[0.3em] text-white/40">Continuar Assistindo</div>
+                            <h3 className="text-xl font-black tracking-tighter text-white line-clamp-2 leading-tight">
+                              {selectedClass.title}
+                            </h3>
+                          </div>
+
+                          <motion.a
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            href={selectedClass.videoUrl.replace('/preview', '/view')}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center justify-center gap-3 bg-white text-black px-6 py-4 rounded-xl font-black uppercase text-[10px] tracking-widest w-full shadow-2xl transition-all"
+                          >
+                            <Film className="w-4 h-4" />
+                            Assistir no Drive
+                            <ChevronRight className="w-4 h-4" />
+                          </motion.a>
+                        </div>
+                      </motion.div>
+                    ) : (
+                      <motion.iframe
+                        key={selectedClass.id}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        src={selectedClass.videoUrl}
+                        className="absolute inset-0 w-full h-full"
+                        allow="autoplay; encrypted-media; picture-in-picture"
+                        allowFullScreen
+                        referrerPolicy="no-referrer"
+                        style={{ border: 'none' }}
+                      />
+                    )
                   ) : (
-                    <div className="flex flex-col items-center justify-center gap-4 opacity-10 min-h-[300px]">
+                    <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 opacity-10">
                       <Film className="w-12 h-12 lg:w-16 h-16" />
                       <span className="text-[8px] sm:text-[10px] uppercase tracking-[0.3em] font-black">Video Unavailable</span>
                     </div>
