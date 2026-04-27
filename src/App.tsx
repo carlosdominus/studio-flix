@@ -5,7 +5,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Play, ChevronLeft, ChevronRight, Info, Clock, CheckCircle2, LayoutGrid, Search, User, RefreshCw, AlertCircle, Film } from 'lucide-react';
+import { Play, ChevronLeft, ChevronRight, Info, Clock, CheckCircle2, LayoutGrid, Search, User, RefreshCw, AlertCircle, Film, Menu, X } from 'lucide-react';
 import { INITIAL_DATA, Class, Module } from './types.ts';
 import { fetchLessonsFromDrive, DriveFile } from './services/driveService.ts';
 
@@ -13,17 +13,45 @@ declare const google: any;
 
 export default function App() {
   const [selectedClass, setSelectedClass] = useState<Class | null>(INITIAL_DATA[0].classes[0]);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const scrollRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
 
+  const handleClassSelect = (cls: Class) => {
+    setSelectedClass(cls);
+    setIsSidebarOpen(false); // Close sidebar on mobile after selection
+  };
+
   return (
-    <div className="flex h-screen bg-brand-bg text-brand-text overflow-hidden font-sans text-sm selection:bg-white/10">
+    <div className="flex h-screen bg-brand-bg text-brand-text overflow-hidden font-sans text-sm selection:bg-white/10 relative">
+      {/* Mobile Sidebar Overlay */}
+      <AnimatePresence>
+        {isSidebarOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setIsSidebarOpen(false)}
+            className="fixed inset-0 bg-black/60 z-30 lg:hidden backdrop-blur-sm"
+          />
+        )}
+      </AnimatePresence>
+
       {/* Sidebar */}
-      <aside className="w-56 flex-shrink-0 bg-brand-sidebar border-r border-white/5 flex flex-col z-20">
+      <aside 
+        className={`fixed inset-y-0 left-0 w-64 lg:static lg:w-56 flex-shrink-0 bg-brand-sidebar border-r border-white/5 flex flex-col z-40 transition-transform duration-300 transform ${
+          isSidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
+        }`}
+      >
         <div className="p-5 overflow-y-auto flex-grow h-full custom-scrollbar">
-          <h1 className="text-lg font-extrabold tracking-tighter text-gray-300 mb-6 flex items-center gap-2">
-            <Film className="w-5 h-5 text-gray-400" />
-            STUDIO<span className="font-light">FLIX</span>
-          </h1>
+          <div className="flex items-center justify-between mb-6">
+            <h1 className="text-lg font-extrabold tracking-tighter text-gray-300 flex items-center gap-2">
+              <Film className="w-5 h-5 text-gray-400" />
+              STUDIO<span className="font-light">FLIX</span>
+            </h1>
+            <button onClick={() => setIsSidebarOpen(false)} className="lg:hidden p-1 opacity-60 hover:opacity-100">
+              <X className="w-5 h-5" />
+            </button>
+          </div>
 
           <div className="space-y-4">
             {INITIAL_DATA.map((module, idx) => (
@@ -35,7 +63,7 @@ export default function App() {
                   {module.classes.map((cls) => (
                     <div
                       key={cls.id}
-                      onClick={() => setSelectedClass(cls)}
+                      onClick={() => handleClassSelect(cls)}
                       className={`group cursor-pointer p-2 rounded transition-all border-l-2 ${
                         selectedClass?.id === cls.id
                           ? 'bg-white/5 border-white/40 shadow-sm'
@@ -64,14 +92,22 @@ export default function App() {
       </aside>
 
       {/* Main View */}
-      <main className="flex-grow flex flex-col p-6 overflow-y-auto">
+      <main className="flex-grow flex flex-col p-4 lg:p-6 overflow-y-auto w-full">
         <header className="flex items-center justify-between h-8 mb-6">
-          <div className="flex items-center gap-2 text-xs">
-            <span className="opacity-40 uppercase tracking-widest text-[10px]">
-              {INITIAL_DATA.find(m => m.classes.some(c => c.id === selectedClass?.id))?.title}
-            </span>
-            <span className="opacity-20">/</span>
-            <span className="font-bold truncate max-w-[200px]">{selectedClass?.title}</span>
+          <div className="flex items-center gap-3">
+            <button 
+              onClick={() => setIsSidebarOpen(true)}
+              className="lg:hidden p-1.5 bg-white/5 rounded border border-white/10 hover:bg-white/10 transition-colors"
+            >
+              <Menu className="w-4 h-4" />
+            </button>
+            <div className="flex items-center gap-2 text-xs">
+              <span className="opacity-40 uppercase tracking-widest text-[10px] hidden sm:inline">
+                {INITIAL_DATA.find(m => m.classes.some(c => c.id === selectedClass?.id))?.title}
+              </span>
+              <span className="opacity-20 hidden sm:inline">/</span>
+              <span className="font-bold truncate max-w-[120px] sm:max-w-[200px]">{selectedClass?.title}</span>
+            </div>
           </div>
 
           <div className="flex items-center gap-3">
@@ -129,7 +165,7 @@ export default function App() {
                 </span>
               </div>
               
-              <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
                 {INITIAL_DATA.find(m => m.classes.some(c => c.id === selectedClass?.id))?.classes.map(cls => (
                   <motion.div
                     key={cls.id}
