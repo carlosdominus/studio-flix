@@ -62,7 +62,7 @@ export const INITIAL_DATA: Module[] = [
         title: 'Class 1',
         description: 'First session covering the core principles and environment setup.',
         videoUrl: 'https://drive.google.com/file/d/1Ki7UDmxpn4YXinSKlL3pVZESXHFQd_Uy/preview',
-        thumbnail: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&q=60&w=800',
+        thumbnail: 'https://i.ibb.co/mCtrVgvp/SM1.png',
         duration: '10:30'
       },
       {
@@ -70,7 +70,7 @@ export const INITIAL_DATA: Module[] = [
         title: 'Class 2',
         description: 'Detailed walkthrough of the standard procedures and techniques.',
         videoUrl: 'https://drive.google.com/file/d/1GiKO2gosS-WBh7PymebNzxQcQ5aJ48k7/preview',
-        thumbnail: 'https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?auto=format&fit=crop&q=60&w=800',
+        thumbnail: 'https://i.ibb.co/Dfzhjf3n/SM2.png',
         duration: '14:45'
       },
       {
@@ -78,7 +78,7 @@ export const INITIAL_DATA: Module[] = [
         title: 'Class 3',
         description: 'Intermediate module focused on practical application and depth.',
         videoUrl: 'https://drive.google.com/file/d/1ia9lyjfTyu_jmfwD6x0EXbRztbOxpR6T/preview',
-        thumbnail: 'https://images.unsplash.com/photo-1459706662435-0d67f052882e?auto=format&fit=crop&q=60&w=800',
+        thumbnail: 'https://i.ibb.co/SwSzQCpb/SL3.png',
         duration: '21:10'
       },
       {
@@ -86,7 +86,7 @@ export const INITIAL_DATA: Module[] = [
         title: 'Class 4',
         description: 'Finalizing the module with integrated practices and reviews.',
         videoUrl: 'https://drive.google.com/file/d/1Df3hLuwcqUMC6uSAORBEB-_n9QVR8mDk/preview',
-        thumbnail: 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&q=60&w=800',
+        thumbnail: 'https://i.ibb.co/WNv0yx34/SL4.png',
         duration: '16:20'
       }
     ]
@@ -100,7 +100,7 @@ export const INITIAL_DATA: Module[] = [
         title: 'Class 1',
         description: 'Introduction to balance and harmony within the project scope.',
         videoUrl: 'https://drive.google.com/file/d/19vwqxFuLCGOUY_sooJ7K7PW9axCrzTS7/preview',
-        thumbnail: 'https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&q=60&w=800',
+        thumbnail: 'https://i.ibb.co/wrddXjx3/SB1.png',
         duration: '13:15'
       },
       {
@@ -108,7 +108,7 @@ export const INITIAL_DATA: Module[] = [
         title: 'Class 2',
         description: 'Achieving consistent results through applied framework methods.',
         videoUrl: 'https://drive.google.com/file/d/1R9AjN1Vg10cs0r-Wnlcb8WL06Lcd70As/preview',
-        thumbnail: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=60&w=800',
+        thumbnail: 'https://i.ibb.co/67Gzwm3n/SB2.png',
         duration: '19:40'
       },
       {
@@ -116,7 +116,7 @@ export const INITIAL_DATA: Module[] = [
         title: 'Class 3',
         description: 'Advanced refinements and finalizing technical details.',
         videoUrl: 'https://drive.google.com/file/d/1qFKhBeHV33ZrujrIlB8Azz2csgykEfv-/preview',
-        thumbnail: 'https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&q=60&w=800',
+        thumbnail: 'https://i.ibb.co/ksfYfcs4/SB3.png',
         duration: '25:00'
       },
       {
@@ -124,7 +124,7 @@ export const INITIAL_DATA: Module[] = [
         title: 'Class 4',
         description: 'Masterclass concluding the spirit balance series.',
         videoUrl: 'https://drive.google.com/file/d/1rAOLM6T2muS6nH6er_wJ2BJfvvV9YV4J/preview',
-        thumbnail: 'https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?auto=format&fit=crop&q=60&w=800',
+        thumbnail: 'https://i.ibb.co/YFFCzDbd/SB4.png',
         duration: '31:50'
       }
     ]
