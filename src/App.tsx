@@ -133,7 +133,7 @@ export default function App() {
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
                       src={selectedClass.videoUrl}
-                      className="absolute top-1/2 left-1/2 w-[160%] h-[160%] -translate-x-1/2 -translate-y-[65%] md:w-[135%] md:h-[135%] md:-translate-y-[62%]"
+                      className="absolute inset-0 w-full h-full scale-[1.25] -translate-y-[6%] md:scale-[1.15] md:-translate-y-[4%]"
                       allow="autoplay; encrypted-media; picture-in-picture"
                       allowFullScreen
                       referrerPolicy="no-referrer"
